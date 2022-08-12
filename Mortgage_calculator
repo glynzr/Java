@@ -9,16 +9,45 @@ public class Main {
         //n ->number of years
         // r-> annually interest rate
         final byte month=12;
+        int principal;
+        float rate;
+        byte year;
+
         Scanner scanner =new Scanner(System.in);
 
-        System.out.print("Principal:");
-        int principal= scanner.nextInt();
+        //Input principal
+        while (true){
+            System.out.print("Principal ($1K -$1M):");
+            principal= scanner.nextInt();
 
-        System.out.print("Annual interest rate:");
-        float rate= scanner.nextFloat();
+            if (principal>=Math.pow(10,3) && principal<=Math.pow(10,6)){
+                break;
+            }
+            System.out.println("Enter a value between 1,000 and 1,000,000!");
 
-        System.out.print("Period(years):");
-        byte year= scanner.nextByte();
+        }
+        //Input Annual interest rate
+        while (true){
+            System.out.print("Annual interest rate:");
+            rate= scanner.nextFloat();
+            if (rate>0 && rate<=30){
+                break;
+            }
+            System.out.println("Enter a value greater than 0 and less than or equal to 30!");
+        }
+
+        
+        //Input year
+        while (true){
+            System.out.print("Period(years):");
+            year= scanner.nextByte();
+            if (year>=1 && year<=30){
+                break;
+            }
+            System.out.println("Enter a value between 1 and 30!");
+
+
+        }
 
         double RE=Math.pow(1+rate*0.01/month,year*month);
         double mortgage= (principal*rate*RE*0.01)/((RE-1)*month);
@@ -26,6 +55,8 @@ public class Main {
 
         String result= NumberFormat.getCurrencyInstance().format(mortgage);
         System.out.println("Mortgage:"+result);
+
+
 
     }
 }
