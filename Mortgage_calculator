@@ -1,0 +1,31 @@
+import java.text.NumberFormat;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        //Our main formula is M=(P*r*(1+r*0.01/12)**(n*12))/((1+r*0.01/12)**(n*12)-1)*12*100
+        //M -> mortgagge
+        //P-> principal
+        //n ->number of years
+        // r-> annually interest rate
+        final byte month=12;
+        Scanner scanner =new Scanner(System.in);
+
+        System.out.print("Principal:");
+        int principal= scanner.nextInt();
+
+        System.out.print("Annual interest rate:");
+        float rate= scanner.nextFloat();
+
+        System.out.print("Period(years):");
+        byte year= scanner.nextByte();
+
+        double RE=Math.pow(1+rate*0.01/month,year*month);
+        double mortgage= (principal*rate*RE*0.01)/((RE-1)*month);
+
+
+        String result= NumberFormat.getCurrencyInstance().format(mortgage);
+        System.out.println("Mortgage:"+result);
+
+    }
+}
